@@ -5,20 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.pogos.myapplication.R
 import com.pogos.myapplication.databinding.FragmentChooseLevelBinding
 import com.pogos.myapplication.domain.entity.Level
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ChooseLevelFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ChooseLevelFragment : Fragment() {
 
     private var _binding: FragmentChooseLevelBinding? = null
@@ -58,21 +49,13 @@ class ChooseLevelFragment : Fragment() {
     }
 
     private fun launchGameFragment(level:Level) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, GameFragment.newInstance(level))
-            .addToBackStack(GameFragment.NAME)
-            .commit()
+        findNavController().navigate(
+            ChooseLevelFragmentDirections.actionChooseLevelFragmentToGameFragment(level)
+        )
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-
-        const val NAME = "ChooseLevelFragment"
-
-        fun newInstance() = ChooseLevelFragment()
     }
 }
